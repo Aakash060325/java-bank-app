@@ -1,0 +1,155 @@
+.todoItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    transition: all var(--transition-normal);
+    animation: slideIn 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.todoItem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--color-accent-primary), var(--color-accent-secondary));
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.todoItem:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.todoItem:hover::before {
+    opacity: 1;
+}
+
+.todoContent {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border: 2px solid var(--color-accent-primary);
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.checkbox:hover {
+    background: rgba(99, 102, 241, 0.1);
+    transform: scale(1.1);
+}
+
+.completed .checkbox {
+    background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+    border-color: var(--color-accent-secondary);
+}
+
+.checkIcon {
+    width: 16px;
+    height: 16px;
+    color: white;
+    animation: checkPop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.todoText {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: all var(--transition-normal);
+    word-break: break-word;
+}
+
+.completed .todoText {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.deleteBtn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border: none;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    opacity: 0;
+}
+
+.todoItem:hover .deleteBtn {
+    opacity: 1;
+}
+
+.deleteBtn svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-danger);
+    transition: transform var(--transition-fast);
+}
+
+.deleteBtn:hover {
+    background: var(--color-danger);
+    transform: scale(1.1);
+}
+
+.deleteBtn:hover svg {
+    color: white;
+    transform: scale(1.1);
+}
+
+.deleteBtn:active {
+    transform: scale(0.95);
+}
